@@ -50,10 +50,11 @@ $(".gif").on("click", function() {
       } else {
         $(this).attr("src", $(this).attr("data-still"));
         $(this).attr("data-state", "still");}
+});
 
 $("#addFood").on('click', function(){
 	var newFood = $('#newFoodInput').val().trim();
-	foodTitle.push(newFood);
+	foods.push(newFood);
 	createButtons();
 	return false;
 });
