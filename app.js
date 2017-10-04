@@ -1,6 +1,6 @@
 var foods = ['grilled cheese', 'spaghetti', 'cheeseburger', 'chicken sandwich', 'burrito', 'taco', 'ramen', 'pork'];
 var thisFood = $(this).data('name');
-var queryURL = "http://api.giphy.com/v1/gifs/search?q=food" + thisFood + "OnZa76OpD68ZcG12DDYV8tmyJqBg6lST";
+var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + thisFood + "&limit=10&api_key=OnZa76OpD68ZcG12DDYV8tmyJqBg6lST";
 
 
 function createButtons(){
