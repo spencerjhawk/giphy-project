@@ -1,0 +1,42 @@
+var foods = ['grilled cheese', 'spaghetti', 'cheeseburger', 'chicken sandwich', 'burrito', 'taco', 'ramen', 'pork'];
+var thisFood = $(this).data('name');
+var queryURL = "http://api.giphy.com/v1/gifs/search?q=food" + thisFood + "OnZa76OpD68ZcG12DDYV8tmyJqBg6lST"
+
+$.ajax({
+      url: queryURL,
+      method: 'GET'
+    }).done(function(response) {
+      console.log(response);
+    });
+
+function createButtons(){
+	$("#FoodButtons").empty();
+	for(var i = 0; i < foods.length; i++){
+		var foodBtn = $('<button>').text(foods[i]).addClass('buttons').attr({'data-name': foods[i]});
+		$("#FoodButtons").append(foodBtn);
+	}
+$("#FoodButtons").on('click', function(){
+		$('.display').empty();
+
+		var thisFood = $(this).data('name');
+$(".gif").on("click", function() {
+      // The attr jQuery method allows us to get or set the value of any attribute on our HTML element
+      var state = $(this).attr("data-state");
+      // If the clicked image's state is still, update its src attribute to what its data-animate value is.
+      // Then, set the image's data-state to animate
+      // Else set src to the data-still value
+      if (state === "still") {
+        $(this).attr("src", $(this).attr("data-animate"));
+        $(this).attr("data-state", "animate");
+      } else {
+        $(this).attr("src", $(this).attr("data-still"));
+        $(this).attr("data-state", "still");
+
+$("#addFood").on('click', function(){
+	var newFood = $('#newFoodInput').val().trim();
+	foodTitle.push(newFood);
+	createButtons();
+	return false;
+});
+
+createButtons();
