@@ -1,2 +1,0 @@
-# giphyproject
-Giphy API project
