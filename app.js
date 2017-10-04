@@ -3,6 +3,7 @@ var thisFood = $(this).data('name');
 var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + thisFood + "&limit=10&api_key=OnZa76OpD68ZcG12DDYV8tmyJqBg6lST";
 var currentGif; var pausedGif; var animatedGif; var stillGif;
 
+
 function createButtons(){
 	$("#FoodButtons").empty();
 	for(var i = 0; i < foods.length; i++){
@@ -16,8 +17,8 @@ $("#FoodButtons").on('click', function(){
     $.ajax({
       url: queryURL,
       method: 'GET'
-    }).done(function(response) {
-      console.log(response);
+    }).done(function(queryURL, response) {
+      console.log(queryURL);
     });
 
     currentGif = queryURL.data;
