@@ -1,7 +1,7 @@
 var foods = ['grilled cheese', 'spaghetti', 'cheeseburger', 'chicken sandwich', 'burrito', 'taco', 'ramen', 'pork'];
 var thisFood = $(this).data('name');
-var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + thisFood + "&limit=10&api_key=OnZa76OpD68ZcG12DDYV8tmyJqBg6lST";
-
+var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + thisFood + "&limit=10&api_key=OnZa76OpD68ZcG12DDYV8tmyJqBg6lST";
+var currentGif; var pausedGif; var animatedGif; var stillGif;
 
 function createButtons(){
 	$("#FoodButtons").empty();
@@ -20,7 +20,7 @@ $("#FoodButtons").on('click', function(){
       console.log(response);
     });
 
-    currentGif = giphy.data;
+    currentGif = queryURL.data;
       $.each(currentGif, function(index,value){
         animatedGif= value.images.original.url;
         pausedGif = value.images.original_still.url;
