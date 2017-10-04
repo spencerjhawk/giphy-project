@@ -1,13 +1,7 @@
 var foods = ['grilled cheese', 'spaghetti', 'cheeseburger', 'chicken sandwich', 'burrito', 'taco', 'ramen', 'pork'];
 var thisFood = $(this).data('name');
-var queryURL = "http://api.giphy.com/v1/gifs/search?q=food" + thisFood + "OnZa76OpD68ZcG12DDYV8tmyJqBg6lST"
+var queryURL = "http://api.giphy.com/v1/gifs/search?q=food" + thisFood + "OnZa76OpD68ZcG12DDYV8tmyJqBg6lST";
 
-$.ajax({
-      url: queryURL,
-      method: 'GET'
-    }).done(function(response) {
-      console.log(response);
-    });
 
 function createButtons(){
 	$("#FoodButtons").empty();
@@ -15,8 +9,33 @@ function createButtons(){
 		var foodBtn = $('<button>').text(foods[i]).addClass('buttons').attr({'data-name': foods[i]});
 		$("#FoodButtons").append(foodBtn);
 	}
+
 $("#FoodButtons").on('click', function(){
 		$('.display').empty();
+    var thisFood = $(this).data('name');
+    $.ajax({
+      url: queryURL,
+      method: 'GET'
+    }).done(function(response) {
+      console.log(response);
+    });
+
+    currentGif = giphy.data;
+      $.each(currentGif, function(index,value){
+        animatedGif= value.images.original.url;
+        pausedGif = value.images.original_still.url;
+        var thisRating = value.rating;
+        //gives blank ratings 'unrated' text
+        if(thisRating == ''){
+          thisRating = 'unrated';
+        }
+        var rating = $('<h5>').html('Rated: '+thisRating).addClass('ratingStyle');
+        stillGif= $('<img>').attr('data-animated', animatedGif).attr('data-paused', pausedGif).attr('src', pausedGif).addClass('playOnHover');
+        var fullGifDisplay = $('<button>').append(rating, stillGif);
+        $('.display').append(fullGifDisplay);
+      });
+    });
+  };
 
 		var thisFood = $(this).data('name');
 $(".gif").on("click", function() {
@@ -30,7 +49,7 @@ $(".gif").on("click", function() {
         $(this).attr("data-state", "animate");
       } else {
         $(this).attr("src", $(this).attr("data-still"));
-        $(this).attr("data-state", "still");
+        $(this).attr("data-state", "still");}
 
 $("#addFood").on('click', function(){
 	var newFood = $('#newFoodInput').val().trim();
@@ -38,5 +57,3 @@ $("#addFood").on('click', function(){
 	createButtons();
 	return false;
 });
-
-createButtons();
